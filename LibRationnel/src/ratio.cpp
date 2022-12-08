@@ -1,13 +1,13 @@
-#include "./include/ratio.hpp"
+#include "../include/ratio.hpp"
 
 Ratio::Ratio() {
-    n_num = 0;
-    m_den = 1;
+    this->n_num = 0;
+    this->m_den = 1;
 }
 
-Ratio::Ratio(const T &den, const T &num) {
-    n_num = num;
-    n_den = den;
+Ratio::Ratio(const T &num, const T &den) {
+    this->n_num = num;
+    this->n_den = den;
 }
 
 Ratio convert_float_to_ratio(const T &real) {
@@ -40,12 +40,7 @@ Ratio operator/(const Ratio &rn) const {
     return 42;
 }
 
-Ratio operator++() {
-    //...
-    return 42;
-}
-
-Ratio operator--() {
+std::ostream &operator<<(std::ostream &stream, const Ratio<T> &rn) {
     //...
     return 42;
 }
