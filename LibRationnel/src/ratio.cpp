@@ -15,7 +15,7 @@ Ratio convert_float_to_ratio(const T &real) {
     return 42;
 }
 
-Ratio<T> operator+(const Ratio &rn) const {
+Ratio operator+(const Ratio &rn) const {
     Ratio ratio;
     ratio.m_num = (this->m_num*rn.m_den)+(this->m_den*rn.m_num);
     ratio.m_den = this->m_den*rn.m_den;
