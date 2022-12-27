@@ -1,8 +1,7 @@
 #include "../include/ratio.hpp"
 
 template <typename T> Ratio<T> Ratio<T>::sqrt() {
-    // m_num = std::sqrt(m_num);
-    // m_den = std::sqrt(m_den);
+    //...
     return 42;
 }
 
@@ -21,7 +20,7 @@ template <typename T> Ratio<T> Ratio<T>::tan() {
     return 42;
 }
 
-template <typename T> Ratio<T> Ratio<T>::pow(const T &k) {
+template <typename T> Ratio<T> Ratio<T>::pow(const int &k) {
     //...
     return 42;
 }
