@@ -1,5 +1,6 @@
-template <typename T>
-class Ratio{
+#include <iostream>
+
+template <typename T> class Ratio{
 
     private :
 
@@ -38,19 +39,19 @@ class Ratio{
     inline bool operator>(const Ratio &rn);
     inline bool operator>=(const Ratio &rn);
 
-    template<typename T>
-    friend std::ostream& operator<< (std::ostream& stream, const Ratio<T> &rn);
-
     //applications
-    static Ratio sqrt(const Ratio & rn);
-    static Ratio cos(const Ratio & rn);
-    static Ratio sin(const Ratio & rn);	
-    static Ratio tan(const Ratio & rn);
-    static Ratio pow(const Ratio & rn, const T &k);
-    static Ratio exp(const Ratio & rn);
-    static Ratio log(const Ratio & rn);
-    static Ratio p_ent(const Ratio & rn);
-    static Ratio abs(const Ratio & rn);
-    
-
+    Ratio sqrt(); // racine carrée
+    Ratio cos(); // cosinus
+    Ratio sin(); // sinus
+    Ratio tan(); // tangeante
+    Ratio pow(const T &k); // puissance
+    Ratio exp(); // exponentielle
+    Ratio log(); // logarithme (népérien ?)
+    int int_part(); // partie entière
+    Ratio abs(); // valeur absolue
 };
+
+template <typename T> std::ostream &operator<< (std::ostream &stream, const Ratio<T> &rn) { 
+ 	stream << rn.m_num << "/" << rn.m_num;
+	return stream;
+}

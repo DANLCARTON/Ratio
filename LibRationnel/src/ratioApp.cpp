@@ -1,46 +1,46 @@
 #include "../include/ratio.hpp"
 
-Ratio sqrt(const Ratio &rn) {
+template <typename T> Ratio<T> Ratio<T>::sqrt() {
+    
+    return 42;
+}
+
+template <typename T> Ratio<T> Ratio<T>::cos() {
     //...
     return 42;
 }
 
-Ratio cos(const Ratio &rn) {
+template <typename T> Ratio<T> Ratio<T>::sin() {
     //...
     return 42;
 }
 
-Ratio sin(const Ratio &rn) {
+template <typename T> Ratio<T> Ratio<T>::tan() {
     //...
     return 42;
 }
 
-Ratio tan(const Ratio &rn) {
+template <typename T> Ratio<T> Ratio<T>::pow(const T &k) {
     //...
     return 42;
 }
 
-Ratio pow(const Ratio &rn) {
+template <typename T> Ratio<T> Ratio<T>::exp() {
     //...
     return 42;
 }
 
-Ratio exp(const Ratio &rn) {
+template <typename T> Ratio<T> Ratio<T>::log() {
     //...
     return 42;
 }
 
-Ratio log(const Ratio &rn) {
+template <typename T> int Ratio<T>::int_part() {
     //...
     return 42;
 }
 
-Ratio p_ent(const Ratio &rn) {
-    //...
-    return 42;
-}
-
-Ratio abs(const Ratio &rn) {
+template <typename T> Ratio<T> Ratio<T>::abs() {
     //...
     return 42;
 }
