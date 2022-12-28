@@ -32,5 +32,6 @@ int main() {
     std::cout << (a >= c) << std::endl;
     std::cout << (a > b) << std::endl;
     std::cout << (a > c) << std::endl;
+    std::cout << b.make_irreductible() << std::endl;
 
 }  
