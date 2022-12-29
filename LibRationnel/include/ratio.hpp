@@ -1,56 +1,234 @@
-template <typename T>
-class Ratio{
+#ifndef RATIO
+#define RATIO
+
+#include <iostream>
+#include <numeric>
+#include <algorithm>
+
+template <typename T> class Ratio{
 
     private :
 
-    T m_num;
-    T m_den;
+    int m_num;
+    int m_den;
 
     public :
 
-    Ratio();
-    Ratio(const T &num, const T &dem);
+    Ratio(const int &num = 0, const int &den = 1) : m_num(num), m_den(den) {};
     ~Ratio() = default;
 
-    
-    Ratio convert_float_to_ratio(const T &real);
 
     //opérateurs
     
     Ratio operator+(const Ratio &rn) const;
     Ratio operator-(const Ratio &rn) const;
     Ratio operator*(const Ratio &rn) const;
-    Ratio inverse() const;
     Ratio operator/(const Ratio &rn) const;
 
-    inline Ratio operator/(const T &value) const {return Ratio(m_num, value * m_den);}
-    inline Ratio operator++() {return Ratio(m_den + m_num, m_den);}
-    inline Ratio operator--() {return Ratio(m_den - m_num, m_den);}
-    inline friend Ratio operator*(const T &value) {return (this->m_num * value, this->m_den);}
-    inline friend Ratio operator*(const Ratio &rn) {return (rn.m_num * this, rn.m_den);}
-	inline friend Ratio operator/(const T &value, const Ratio &rn) {return Ratio(value)/rn;};
-	inline Ratio operator-(const Ratio &rn) {return Ratio(-rn);};
+    Ratio operator/(const T &real) const;
+    Ratio operator*(const T &real) const;
+    Ratio operator-(const T &real) const;
+    Ratio operator+(const T &real) const;
 
-    inline bool operator==(const Ratio &rn);
-    inline bool operator!=(const Ratio &rn);
-    inline bool operator<(const Ratio &rn);
-    inline bool operator<=(const Ratio &rn);
-    inline bool operator>(const Ratio &rn);
-    inline bool operator>=(const Ratio &rn);
+    Ratio operator++(); // marche qu'avec ++a mais pas avec a++
+    Ratio operator--(); // marche qu'avec --a mais pas avec a--
 
-    template<typename T>
-    friend std::ostream& operator<< (std::ostream& stream, const Ratio<T> &rn);
+	Ratio operator-(); // moins unaire
+
+    bool operator==(const Ratio &rn);
+    bool operator!=(const Ratio &rn);
+    bool operator<(const Ratio &rn);
+    bool operator<=(const Ratio &rn);
+    bool operator>(const Ratio &rn);
+    bool operator>=(const Ratio &rn);
+
+    // getters
+    inline int num() const {return m_num;};
+    inline int den() const {return m_den;};
 
     //applications
-    static Ratio sqrt(const Ratio & rn);
-    static Ratio cos(const Ratio & rn);
-    static Ratio sin(const Ratio & rn);	
-    static Ratio tan(const Ratio & rn);
-    static Ratio pow(const Ratio & rn, const T &k);
-    static Ratio exp(const Ratio & rn);
-    static Ratio log(const Ratio & rn);
-    static Ratio p_ent(const Ratio & rn);
-    static Ratio abs(const Ratio & rn);
-    
-
+    Ratio inverse() const;
+    Ratio make_irreductible();
+    Ratio sqrt(); // racine carrée
+    Ratio cos(); // cosinus
+    Ratio sin(); // sinus
+    Ratio tan(); // tangeante
+    Ratio pow(const int &k); // puissance k
+    Ratio exp(); // exponentielle
+    Ratio log(); // logarithme (népérien ?)
+    int int_part(); // partie entière
+    Ratio abs(); // valeur absolue
 };
+
+// - - - P R I N T   W I T H   S T D : : C O U T - - -
+
+template <typename T> std::ostream &operator<< (std::ostream &stream, const Ratio<T> &rn) { 
+ 	stream << rn.num() << "/" << rn.den();
+	return stream;
+}
+
+// - - - F U N C T I O N S   P R O T O T Y P E S - - -
+
+Ratio<int> convert_float_to_ratio(const double &real, const unsigned int &nbIter);
+
+// - - - M E T H O D S - - -
+
+template <typename T> Ratio<T> Ratio<T>::inverse() const {
+    Ratio ratio;
+    ratio.m_num = this->m_den;
+    ratio.m_den = this->m_num;
+    // rendre irreductible
+    return ratio;
+}
+
+template <typename T> Ratio<T> Ratio<T>::make_irreductible() {
+    Ratio ratio;
+    int gcd = std::gcd(this->m_num, this->m_den);
+    ratio.m_num = this->m_num/gcd;
+    ratio.m_den = this->m_den/gcd;
+    return ratio;
+}
+
+// - - - O P E R A T O R S - - -
+
+template <typename T> Ratio<T> Ratio<T>::operator+(const Ratio &rn) const {
+    Ratio ratio;
+    ratio.m_num = this->m_num*rn.m_den + this->m_den*rn.m_num;
+    ratio.m_den = this->m_den*rn.m_den;
+    ratio = ratio.make_irreductible();
+    return ratio;
+}
+
+template <typename T> Ratio<T> Ratio<T>::operator+(const T &real) const {
+    Ratio ratio;
+    Ratio ratio2 = convert_float_to_ratio(real, 10);
+    ratio.m_num = this->m_num*ratio2.m_den + this->m_den*ratio2.m_num;
+    ratio.m_den = this->m_den*ratio2.m_den;
+    ratio = ratio.make_irreductible();
+    return ratio;
+}
+
+template <typename T> Ratio<T> Ratio<T>::operator-(const Ratio &rn) const {
+    Ratio ratio;
+    ratio.m_num = this->m_num*rn.m_den - this->m_den*rn.m_num;
+    ratio.m_den = this->m_den*rn.m_den;
+    ratio = ratio.make_irreductible();
+    return ratio;
+}
+
+template <typename T> Ratio<T> Ratio<T>::operator-(const T &real) const {
+    Ratio ratio;
+    Ratio ratio2 = convert_float_to_ratio(real, 10);
+    ratio.m_num = this->m_num*ratio2.m_den - this->m_den*ratio2.m_num;
+    ratio.m_den = this->m_den*ratio2.m_den;
+    ratio = ratio.make_irreductible();
+    return ratio;
+}
+
+template <typename T> Ratio<T> Ratio<T>::operator*(const Ratio &rn) const {
+    Ratio ratio;
+    ratio.m_num = (this->m_num*rn.m_num);
+    ratio.m_den = (this->m_den*rn.m_den);
+    ratio = ratio.make_irreductible();
+    return ratio;
+}
+
+template <typename T> Ratio<T> Ratio<T>::operator*(const T &real) const {
+    Ratio ratio;
+    Ratio ratio2 = convert_float_to_ratio(real, 10);
+    ratio.m_num = this->m_num * ratio2.m_num;
+    ratio.m_den = this->m_den * ratio2.m_den;
+    ratio = ratio.make_irreductible();
+    return ratio;
+}
+
+template <typename T> Ratio<T> Ratio<T>::operator/(const Ratio &rn) const {
+    Ratio ratio;
+    ratio.m_num = this->m_num * rn.inverse().m_num;
+    ratio.m_den = this->m_den * rn.inverse().m_den;
+    ratio = ratio.make_irreductible();
+    return ratio;
+}
+
+template <typename T> Ratio<T> Ratio<T>::operator/(const T &real) const {
+    Ratio ratio;
+    Ratio ratio2 = convert_float_to_ratio(real, 10);
+    ratio.m_num = this->m_num * ratio2.inverse().m_num;
+    ratio.m_den = this->m_den * ratio2.inverse().m_den;
+    ratio = ratio.make_irreductible();
+    return ratio;
+}
+
+template <typename T> Ratio<T> Ratio<T>::operator++() {
+    Ratio ratio;
+    ratio.m_num = this->m_num + this->m_den;
+    ratio.m_den = this->m_den;
+    ratio = ratio.make_irreductible();
+    return ratio;
+}
+
+template <typename T> Ratio<T> Ratio<T>::operator--() {
+    Ratio ratio;
+    ratio.m_num = this->m_num - this->m_den;
+    ratio.m_den = this->m_den;
+    ratio = ratio.make_irreductible();
+    return ratio;
+}
+
+template <typename T> Ratio<T> Ratio<T>::operator-() {
+    Ratio ratio;
+    ratio.m_num = -this->m_num;
+    ratio.m_den = this->m_den;
+    ratio = ratio.make_irreductible();
+    return ratio;
+}
+
+template <typename T> bool Ratio<T>::operator==(const Ratio &rn) {
+    Ratio ratio1 = this->make_irreductible();
+    Ratio ratio2 = rn;
+    ratio2 = ratio2.make_irreductible();
+    if (ratio1.m_num == ratio2.m_num && ratio1.m_den == ratio2.m_den) return true;
+    else return false;
+}
+
+template <typename T> bool Ratio<T>::operator!=(const Ratio &rn) {
+    Ratio ratio1 = this->make_irreductible();
+    Ratio ratio2 = rn;
+    ratio2 = ratio2.make_irreductible();
+    if (ratio1.m_num != ratio2.m_num || ratio1.m_den != ratio2.m_den) return true;
+    else return false;
+}
+
+template <typename T> bool Ratio<T>::operator<=(const Ratio &rn) {
+    Ratio ratio1 = this->make_irreductible();
+    Ratio ratio2 = rn;
+    ratio2 = ratio2.make_irreductible();
+    if ((double)ratio1.m_num/(double)ratio1.m_den <= (double)ratio2.m_num/(double)ratio2.m_den) return true;
+    else return false;
+}
+
+template <typename T> bool Ratio<T>::operator<(const Ratio &rn) {
+    Ratio ratio1 = this->make_irreductible();
+    Ratio ratio2 = rn;
+    ratio2 = ratio2.make_irreductible();
+    if ((double)ratio1.m_num/(double)ratio1.m_den < (double)ratio2.m_num/(double)ratio2.m_den) return true;
+    else return false;
+}
+
+template <typename T> bool Ratio<T>::operator>=(const Ratio &rn) {
+    Ratio ratio1 = this->make_irreductible();
+    Ratio ratio2 = rn;
+    ratio2 = ratio2.make_irreductible();
+    if ((double)ratio1.m_num/(double)ratio1.m_den >= (double)ratio2.m_num/(double)ratio2.m_den) return true;
+    else return false;
+}
+
+template <typename T> bool Ratio<T>::operator>(const Ratio &rn) {
+    Ratio ratio1 = this->make_irreductible();
+    Ratio ratio2 = rn;
+    ratio2 = ratio2.make_irreductible();
+    if ((double)ratio1.m_num/(double)ratio1.m_den > (double)ratio2.m_num/(double)ratio2.m_den) return true;
+    else return false;
+}
+
+#endif
