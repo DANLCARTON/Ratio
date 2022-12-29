@@ -4,6 +4,7 @@
 #include <iostream>
 #include <numeric>
 #include <algorithm>
+#include <math.h>
 
 template <typename T> class Ratio{
 
@@ -229,6 +230,76 @@ template <typename T> bool Ratio<T>::operator>(const Ratio &rn) {
     ratio2 = ratio2.make_irreductible();
     if ((double)ratio1.m_num/(double)ratio1.m_den > (double)ratio2.m_num/(double)ratio2.m_den) return true;
     else return false;
+}
+
+// OPERATOR APPLICATIONS
+
+
+template <typename T> Ratio<T> Ratio<T>::sqrt() {
+    Ratio ratio_1 = convert_float_to_ratio(std::sqrt((double)this->m_num), 20);
+    Ratio ratio_2 = convert_float_to_ratio(std::sqrt((double)this->m_den), 20);
+    Ratio ratio;
+    ratio.m_num = ratio_1.m_num * ratio_2.m_den;
+    ratio.m_den = ratio_1.m_den * ratio_2.m_num;
+    return ratio;
+}
+
+// template <typename T> Ratio<T> Ratio<T>::cos() {
+//     //...
+//     return 42;
+// }
+
+// template <typename T> Ratio<T> Ratio<T>::sin() {
+//     //...
+//     return 42;
+// }
+
+// template <typename T> Ratio<T> Ratio<T>::tan() {
+//     //...
+//     return 42;
+// }
+
+template <typename T> Ratio<T> Ratio<T>::pow(const int &k) {
+    Ratio ratio;
+    ratio.m_num = 1;
+    ratio.m_den = 1;
+    for (int i = 0; i < k; i++)
+    {
+        ratio.m_num *= (this->m_num);
+        ratio.m_den *= (this->m_den);
+    }
+
+    return ratio;
+}
+
+// template <typename T> Ratio<T> Ratio<T>::exp() {
+//     //...
+//     return 42;
+// }
+
+// template <typename T> Ratio<T> Ratio<T>::log() {
+//     //...
+//     return 42;
+// }
+
+template <typename T> int Ratio<T>::int_part() {
+    Ratio ratio;
+    ratio.m_den = this->m_den;
+    ratio.m_num = this->m_num;
+    if (ratio > 0) return this->m_num / this->m_den;
+    else return this->m_num / this->m_den - 1;
+}
+
+template <typename T> Ratio<T> Ratio<T>::abs() {
+    Ratio ratio;
+    ratio.m_den = this->m_den;
+    ratio.m_num = this->m_num;
+
+    if ((ratio.m_den >= 0 && ratio.m_num >= 0) || (ratio.m_den <= 0 && ratio.m_num <= 0)) return ratio;
+    else{
+        ratio.m_den = -this->m_den;
+        return ratio;
+    }
 }
 
 #endif
