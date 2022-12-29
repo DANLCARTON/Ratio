@@ -161,16 +161,16 @@ template <typename T> Ratio<T> Ratio<T>::operator/(const T &real) const {
 
 template <typename T> Ratio<T> Ratio<T>::operator++() {
     Ratio ratio;
-    Ratio unit(this->m_den, this->m_den);
-    ratio = *this + unit;
+    ratio.m_num = this->m_num + this->m_den;
+    ratio.m_den = this->m_den;
     ratio = ratio.make_irreductible();
     return ratio;
 }
 
 template <typename T> Ratio<T> Ratio<T>::operator--() {
     Ratio ratio;
-    Ratio unit(this->m_den, this->m_den);
-    ratio = *this - unit;
+    ratio.m_num = this->m_num - this->m_den;
+    ratio.m_den = this->m_den;
     ratio = ratio.make_irreductible();
     return ratio;
 }
