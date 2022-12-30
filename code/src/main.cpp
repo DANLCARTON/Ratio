@@ -1,4 +1,4 @@
-#include "include/ratio.hpp"
+#include "ratio.hpp"
 #include <iostream>
 
 int main() {

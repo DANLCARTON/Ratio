@@ -1,4 +1,4 @@
-#include "../include/ratio.hpp"
+#include "ratio.hpp"
 #include <math.h>
 
 Ratio<int> convert_float_to_ratio(const double &real, const unsigned int &nbIter) {
