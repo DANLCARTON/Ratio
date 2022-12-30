@@ -10,59 +10,246 @@ template <typename T> class Ratio{
 
     private :
 
-    int m_num;
-    int m_den;
+    int m_num; /* Numérateur du Ratio */
+    int m_den; /* Dénominateur du Ratio */
 
     public :
-
+    /**
+     * @brief Constructeur de Ratio
+     * 
+     * @param num 
+     * @param den 
+     */
     Ratio(const int &num = 0, const int &den = 1) : m_num(num), m_den(den) {};
+    /**
+     * @brief Destructeur de Ratio
+     * 
+     */
     ~Ratio() = default;
 
 
     //opérateurs
-    
+    /**
+     * @brief Somme de deux Ratio : a/b + c/d
+     * 
+     * @param rn 
+     * @return Ratio 
+     */
     Ratio operator+(const Ratio &rn) const;
+    /**
+     * @brief Soustraction de deux Ratio : a/b - c/d
+     * 
+     * @param rn 
+     * @return Ratio 
+     */
     Ratio operator-(const Ratio &rn) const;
+    /**
+     * @brief Produit de deux Ratio : a/b * c/d
+     * 
+     * @param rn 
+     * @return Ratio 
+     */
     Ratio operator*(const Ratio &rn) const;
+    /**
+     * @brief Division de deux Ratio : a/b / c/d
+     * 
+     * @param rn 
+     * @return Ratio 
+     */
     Ratio operator/(const Ratio &rn) const;
 
+    /**
+     * @brief Division d'un Ratio avec un scalaire : a/b / scalaire
+     * 
+     * @param real 
+     * @return Ratio 
+     */
     Ratio operator/(const T &real) const;
+    /**
+     * @brief Produit d'un Ratio avec un scalaire : a/b * scalaire
+     * 
+     * @param real 
+     * @return Ratio 
+     */
     Ratio operator*(const T &real) const;
+    /**
+     * @brief Soustraction d'un Ratio avec un scalaire : a/b - scalaire
+     * 
+     * @param real 
+     * @return Ratio 
+     */
     Ratio operator-(const T &real) const;
+    /**
+     * @brief Somme d'un Ratio avec un scalaire : a/b + scalaire
+     * 
+     * @param real 
+     * @return Ratio 
+     */
     Ratio operator+(const T &real) const;
 
+    /**
+     * @brief Ratio +1
+     * 
+     * @return Ratio 
+     */
     Ratio operator++(); // marche qu'avec ++a mais pas avec a++
+    /**
+     * @brief Ratio -1
+     * 
+     * @return Ratio 
+     */
     Ratio operator--(); // marche qu'avec --a mais pas avec a--
 
+    /**
+     * @brief Moins unaire : a/b = -a/b
+     * 
+     * @return Ratio 
+     */
 	Ratio operator-(); // moins unaire
 
+    /**
+     * @brief Comparaison égalité entre deux Ratio : a/b == c/d ?
+     * 
+     * @param rn 
+     * @return true 
+     * @return false 
+     */
     bool operator==(const Ratio &rn);
+    /**
+     * @brief Comparaison inégalité entre deux Ratio : a/b != c/d ?
+     * 
+     * @param rn 
+     * @return true 
+     * @return false 
+     */
     bool operator!=(const Ratio &rn);
+    /**
+     * @brief Comparaison plus petit que entre deux Ratio : a/b < c/d ?
+     * 
+     * @param rn 
+     * @return true 
+     * @return false 
+     */
     bool operator<(const Ratio &rn);
+    /**
+     * @brief Comparaison plus petit ou égal à entre deux Ratio : a/b <= c/d ?
+     * 
+     * @param rn 
+     * @return true 
+     * @return false 
+     */
     bool operator<=(const Ratio &rn);
+    /**
+     * @brief Comparaison plus grand que entre deux Ratio : a/b > c/d ?
+     * 
+     * @param rn 
+     * @return true 
+     * @return false 
+     */
     bool operator>(const Ratio &rn);
+    /**
+     * @brief Comparaison plus grand ou égal à entre deux Ratio : a/b >+ c/d
+     * 
+     * @param rn 
+     * @return true 
+     * @return false 
+     */
     bool operator>=(const Ratio &rn);
 
     // getters
+    /**
+     * @brief Getter numérateur du Ratio : (a/b).num() -> a
+     * 
+     * @return int 
+     */
     inline int num() const {return m_num;};
+    /**
+     * @brief Getter dénominateur du Ratio : (a/b).den()-> b
+     * 
+     * @return int 
+     */
     inline int den() const {return m_den;};
 
     //applications
+    /**
+     * @brief Inverse du Ratio : (a/b).inverse() -> b/a
+     * 
+     * @return Ratio 
+     */
     Ratio inverse() const;
+    /**
+     * @brief Rend un Ratio irreductible : e.g (2a/4b).make_irreductible() -> a/2b
+     * 
+     * @return Ratio 
+     */
     Ratio make_irreductible();
+    /**
+     * @brief Racine carrée d'un Ratio : (a/b).sqrt() -> sqrt(a/b)
+     * 
+     * @return Ratio 
+     */
     Ratio sqrt(); // racine carrée
+    /**
+     * @brief Cosinus d'un Ratio : (a/b).cos() -> cos(a/b)
+     * 
+     * @return Ratio 
+     */
     Ratio cos(); // cosinus
+    /**
+     * @brief Sinus d'un Ratio : (a/b).sin() -> sin(a/b)
+     * 
+     * @return Ratio 
+     */
     Ratio sin(); // sinus
+    /**
+     * @brief Tengente d'un Ratio : (a/b).tan() -> tan(a/b)
+     * 
+     * @return Ratio 
+     */
     Ratio tan(); // tangeante
+    /**
+     * @brief Ratio à la puissance k -> (a/b).pow(k) -> (a/b)^k
+     * 
+     * @param k 
+     * @return Ratio 
+     */
     Ratio pow(const int &k); // puissance k
+    /**
+     * @brief Exponentielle d'un Ratio : (a/b).exp() -> exp(a/b)
+     * 
+     * @return Ratio 
+     */
     Ratio exp(); // exponentielle
+    /**
+     * @brief Logarithme d'un Ratio : (a/b).log() -> log(a/b)
+     * 
+     * @return Ratio 
+     */
     Ratio log(); // logarithme (népérien ?)
+    /**
+     * @brief Partie entière d'un Ratio : (a/b).int_part() -> ⌊(a/b)⌋
+     * 
+     * @return int 
+     */
     int int_part(); // partie entière
+    /**
+     * @brief Valeur abosolue d'un ratio : -a/b -> a/b ; a/b -> a/b
+     * 
+     * @return Ratio 
+     */
     Ratio abs(); // valeur absolue
 };
 
 // - - - P R I N T   W I T H   S T D : : C O U T - - -
 
+/**
+ * @brief Uitliser std::cout << Ratio << std::endl pour afficher un Ratio dans le terminal sous la forme a/b
+ * 
+ * @tparam T 
+ * @param stream 
+ * @param rn 
+ * @return std::ostream& 
+ */
 template <typename T> std::ostream &operator<< (std::ostream &stream, const Ratio<T> &rn) { 
  	stream << rn.num() << "/" << rn.den();
 	return stream;
@@ -70,6 +257,13 @@ template <typename T> std::ostream &operator<< (std::ostream &stream, const Rati
 
 // - - - F U N C T I O N S   P R O T O T Y P E S - - -
 
+/**
+ * @brief Convertir un scalaire en Ratio : scalaire -> a/b
+ * 
+ * @param real 
+ * @param nbIter 
+ * @return Ratio<int> 
+ */
 Ratio<int> convert_float_to_ratio(const double &real, const unsigned int &nbIter);
 
 // - - - M E T H O D S - - -
@@ -85,6 +279,7 @@ template <typename T> Ratio<T> Ratio<T>::inverse() const {
 template <typename T> Ratio<T> Ratio<T>::make_irreductible() {
     Ratio ratio;
     int gcd = std::gcd(this->m_num, this->m_den);
+    if (this->m_num < 0) gcd = -gcd;
     ratio.m_num = this->m_num/gcd;
     ratio.m_den = this->m_den/gcd;
     return ratio;

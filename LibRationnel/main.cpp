@@ -9,6 +9,8 @@ int main() {
     Ratio<int> e(3, 10);
     Ratio<int> f = e.sqrt();
     Ratio<int> g(-34, 10);
+    Ratio<int> h(34, -10);
+    Ratio<int> i(-34, -10);
     std::cout << a << std::endl;
     std::cout << b << std::endl;
     std::cout << c << std::endl;
@@ -43,5 +45,7 @@ int main() {
     std::cout << g.abs() << std::endl;
     std::cout << g.int_part() << std::endl;
     std::cout << a.int_part() << std::endl;
-
+    std::cout << h.make_irreductible() << std::endl;
+    std::cout << i.make_irreductible() << std::endl;
+    
 }  
