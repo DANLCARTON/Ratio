@@ -56,7 +56,7 @@ template <typename T> class Ratio{
     Ratio tan(); // tangeante
     Ratio pow(const int &k); // puissance k
     Ratio exp(); // exponentielle
-    Ratio log(); // logarithme (népérien ?)
+    T log(); // logarithme népérien
     int int_part(); // partie entière
     Ratio abs(); // valeur absolue
 };
@@ -244,20 +244,17 @@ template <typename T> Ratio<T> Ratio<T>::sqrt() {
     return ratio;
 }
 
-// template <typename T> Ratio<T> Ratio<T>::cos() {
-//     //...
-//     return 42;
-// }
+template <typename T> Ratio<T> Ratio<T>::cos() {
+    return convert_float_to_ratio(std::cos((double)this->m_num / (double)this->m_den), 20);
+}
 
-// template <typename T> Ratio<T> Ratio<T>::sin() {
-//     //...
-//     return 42;
-// }
+template <typename T> Ratio<T> Ratio<T>::sin() {
+    return convert_float_to_ratio(std::sin((double)this->m_num / (double)this->m_den), 20);
+}
 
-// template <typename T> Ratio<T> Ratio<T>::tan() {
-//     //...
-//     return 42;
-// }
+template <typename T> Ratio<T> Ratio<T>::tan() {
+    return convert_float_to_ratio(std::tan((double)this->m_num / (double)this->m_den), 20);
+}
 
 template <typename T> Ratio<T> Ratio<T>::pow(const int &k) {
     Ratio ratio;
@@ -272,29 +269,27 @@ template <typename T> Ratio<T> Ratio<T>::pow(const int &k) {
     return ratio;
 }
 
-// template <typename T> Ratio<T> Ratio<T>::exp() {
-//     //...
-//     return 42;
-// }
+template <typename T> Ratio<T> Ratio<T>::exp() {
+    return convert_float_to_ratio(std::exp((double)this->m_num / (double)this->m_den), 20);
+}
 
-// template <typename T> Ratio<T> Ratio<T>::log() {
-//     //...
-//     return 42;
-// }
+template <typename T> T Ratio<T>::log() {
+    return std::log((double)this->m_num) - std::log((double)this->m_den);
+}
+// ne marche pas 
 
 template <typename T> int Ratio<T>::int_part() {
     Ratio ratio;
-    ratio.m_den = this->m_den;
     ratio.m_num = this->m_num;
+    ratio.m_den = this->m_den;
     if (ratio > 0) return this->m_num / this->m_den;
     else return this->m_num / this->m_den - 1;
 }
 
 template <typename T> Ratio<T> Ratio<T>::abs() {
     Ratio ratio;
-    ratio.m_den = this->m_den;
     ratio.m_num = this->m_num;
-
+    ratio.m_den = this->m_den;
     if ((ratio.m_den >= 0 && ratio.m_num >= 0) || (ratio.m_den <= 0 && ratio.m_num <= 0)) return ratio;
     else{
         ratio.m_den = -this->m_den;
