@@ -10,8 +10,8 @@ template <typename T> class Ratio{
 
     private :
 
-    int m_num; /* Numérateur du Ratio */
-    int m_den; /* Dénominateur du Ratio */
+    T m_num; /* Numérateur du Ratio */
+    T m_den; /* Dénominateur du Ratio */
 
     public :
     /**
@@ -86,6 +86,8 @@ template <typename T> class Ratio{
      * @return Ratio 
      */
     Ratio operator+(const T &real) const;
+
+    // template <typename U> friend Ratio operator+(U real, const Ratio<U> &rn);
 
     /**
      * @brief Ratio +1
@@ -360,6 +362,30 @@ template <typename T> Ratio<T> Ratio<T>::operator++() {
     ratio.m_num = this->m_num + this->m_den;
     ratio.m_den = this->m_den;
     ratio = ratio.make_irreductible();
+    return ratio;
+}
+
+template <typename T> Ratio<T> operator+(T real, const Ratio<T> &rn) {
+    Ratio<T> ratio;
+    ratio = rn + real;
+    return ratio;
+}
+
+template <typename T> Ratio<T> operator-(T real, const Ratio<T> &rn) {
+    Ratio<T> ratio;
+    ratio = rn - real;
+    return ratio;
+}
+
+template <typename T> Ratio<T> operator*(T real, const Ratio<T> &rn) {
+    Ratio<T> ratio;
+    ratio = rn * real;
+    return ratio;
+}
+
+template <typename T> Ratio<T> operator/(T real, const Ratio<T> &rn) {
+    Ratio<T> ratio;
+    ratio = rn / real;
     return ratio;
 }
 
