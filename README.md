@@ -57,9 +57,9 @@ Il est ainsi possible de faire :
 
 `real / ratio1;`
 
-`ratio1++;`
+`++ratio1;`
 
-`ratio1--;`
+`--ratio1;`
 
 Chacunes des opérations précédentes rend les fractions irréductibles.
 
