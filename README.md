@@ -32,31 +32,48 @@ Ainsi `ratio3` vaudra $\frac{0}{1}$.
 Soient `ratio1` et `ratio2` deux variables du type `Ratio` et `real` une variable de type `int` ou `double` par exemple
 
 Il est ainsi possible de faire :
-```
-ratio1 + ratio2;
-ratio1 - ratio2;
-ratio1 * ratio2;
-ratio1 / ratio2;
-ratio1 + real;
-ratio1 - real;
-ratio1 * real;
-ratio1 / real;
-real + ratio1;
-real - ratio1;
-real * ratio1;
-real / ratio1;
-ratio1++;
-ratio1--;
-```
+
+`ratio1 + ratio2;`
+
+`ratio1 - ratio2;`
+
+`ratio1 * ratio2;`
+
+`ratio1 / ratio2;`
+
+`ratio1 + real;`
+
+`ratio1 - real;`
+
+`ratio1 * real;`
+
+`ratio1 / real;`
+
+`real + ratio1;`
+
+`real - ratio1;`
+
+`real * ratio1;`
+
+`real / ratio1;`
+
+`ratio1++;`
+
+`ratio1--;`
+
 Chacunes des opérations précédentes rend les fractions irréductibles.
-```
-ratio1 == ratio2;
-ratio1 != ratio2;
-ratio1 < ratio2;
-ratio1 <= ratio2;
-ratio1 > ratio2;
-ratio1 >= ratio2;
-```
+
+`ratio1 == ratio2;`
+
+`ratio1 != ratio2;`
+
+`ratio1 < ratio2;`
+
+`ratio1 <= ratio2;`
+
+`ratio1 > ratio2;`
+
+`ratio1 >= ratio2;`
 
 ### Méthodes
 
@@ -64,24 +81,37 @@ Plusieurs méthodes viennent avec la librairie :
 
 #### Getters 
 `ratio1.num()` donne le numérateur. 
+
 `ratio1.den()` donne le dénominateur.
 
 #### Fonctions
 `ratio1.inverse()` donne l'inverse.
+
 `ratio1.make_irreductible()` rend irreductible.
+
 `ratio1.sqrt()` donne la racine carrée.
+
 `ratio1.cos()` donne le cosinus.
+
 `ratio1.sin()` donne le sinus.
+
 `ratio1.tan()` donne la tengente.
-`ratio1.pow(k)` met à la puissance $k$ ($k$ entier)
+
+`ratio1.pow(k)` met à la puissance $k$ ( $k$ entier)
+
 `ratio1.exp()` donne l'exponentielle.
+
 `ratio1.log()` donne le logarithme.
+
 `ratio1.int_part()` donne la partie entière
+
 `ratio1.abs()` donne la valeur absolue.
 
 #### Autres
 Il est possible d'utiliser la commande `std::cout` pour afficher les Ratio dans le terminal : 
+
 `std::cout << ratio1 << std::endl;`
+
 `>>> a/b`
 
 Il existe une fonction `convert_float_to_ratio(a, n)` prenant en paramètre `a` un nombre à virgule flottante et en paramètre `n` un entier non-signé. Cette fonction permet de convertir un nombre à virgule flottante $a$ en nombre rationnel. $n$ décrit la précision de l'algorithme utilisé. Une valeur entre 10 et 20 permet une précision satisfaisante de manière générale. 
