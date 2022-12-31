@@ -8,10 +8,12 @@ Il s'agit d'une librairie permettant d'exprimer des nombres rationnels (sous la 
 
 ## Pourquoi ?
 En C++, la représentation usuelle des nombres réels se fait par des nombres à virgules flottantes, codés avec un bit de signe, une mantisse et un exposant. Ce genre de représentation est très efficace sur un large panel d'applications, mais peut montrer ses limites dans certains cas. Notez par exemple la suite : 
+
 $$\left\{\begin{matrix}
 u_0 = \frac{1}{3} \\
 u_{n+1} = 4u_n-1
 \end{matrix}\right.$$
+
 Cette suite est constante avec $u_n=\frac{1}{3}, \forall n\in\mathbb{N}$. Pourtant, en codant cette suite avec des `doubles` codés sur 64 bits, cette suite diverge au bout de quelques itérations. 
 
 ## Comment ?
