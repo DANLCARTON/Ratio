@@ -19,10 +19,10 @@ file(GLOB_RECURSE header_files include/*.hpp)
 # default STATIC ??
 # SHARED to make a .so instead of a .a
 # add_library(ganQ SHARED ${source_files} ${header_files})
-add_library(Ratio STATIC ${source_files} ${header_files})
+add_library(Ratio SHARED ${source_files} ${header_files})
 
 # compilation flags
-target_compile_features(Ratio PRIVATE cxx_std_17) # use at least c++ 11
+target_compile_features(Ratio PRIVATE cxx_std_17) # use at least c++ 17
 if (MSVC)
     target_compile_options(Ratio PRIVATE /W3)
 else()

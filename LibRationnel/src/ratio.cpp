@@ -22,5 +22,5 @@ Ratio<int> convert_float_to_ratio(const double &real, const unsigned int &nbIter
             return Ratio<int>(q, 1)+convert_float_to_ratio(real-(double)q, nbIter-1);
         }
     }
-
+    return Ratio<int> (0,1);
 }
