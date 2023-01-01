@@ -61,6 +61,11 @@ Il est ainsi possible de faire :
 
 `--ratio1;`
 
+`ratio1++;`
+
+`ratio1--;`
+
+
 Chacunes des opérations précédentes rend les fractions irréductibles.
 
 `ratio1 == ratio2;`
