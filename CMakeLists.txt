@@ -30,9 +30,6 @@ message(VERBOSE "CMAKE_CXX_COMPILER      : " ${CMAKE_CXX_COMPILER} "\n")
 # not clear to me, but vscode can't work fine without
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# Prevents compiler-specific extensions to C++ because they might allow code to compile on your machine but not on other people's machine
-#set_target_properties(${PROJECT_NAME} PROPERTIES CXX_EXTENSIONS OFF)
-
 # (optional) add a "output" directory in the project binary directory
 file(MAKE_DIRECTORY ${PROJECT_BINARY_DIR}/output)
 

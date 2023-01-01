@@ -59,4 +59,6 @@ int main() {
     std::cout << 2-a << std::endl;
     std::cout << 2*a << std::endl;
     std::cout << 2/a << std::endl;
+    std::cout << a++ << std::endl;
+    std::cout << a-- << std::endl;
 }  

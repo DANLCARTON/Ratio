@@ -94,13 +94,15 @@ template <typename T> class Ratio{
      * 
      * @return Ratio 
      */
-    Ratio operator++(); // marche qu'avec ++a mais pas avec a++
+    Ratio operator++(); 
     /**
      * @brief Ratio -1
      * 
      * @return Ratio 
      */
-    Ratio operator--(); // marche qu'avec --a mais pas avec a--
+    Ratio operator--(); 
+    Ratio operator++(int one);
+    Ratio operator--(int one);
 
     /**
      * @brief Moins unaire : a/b = -a/b
@@ -357,14 +359,6 @@ template <typename T> Ratio<T> Ratio<T>::operator/(const T &real) const {
     return ratio;
 }
 
-template <typename T> Ratio<T> Ratio<T>::operator++() {
-    Ratio ratio;
-    ratio.m_num = this->m_num + this->m_den;
-    ratio.m_den = this->m_den;
-    ratio = ratio.make_irreductible();
-    return ratio;
-}
-
 template <typename T> Ratio<T> operator+(T real, const Ratio<T> &rn) {
     Ratio<T> ratio;
     ratio = rn + real;
@@ -389,7 +383,31 @@ template <typename T> Ratio<T> operator/(T real, const Ratio<T> &rn) {
     return ratio;
 }
 
+template <typename T> Ratio<T> Ratio<T>::operator++() {
+    Ratio ratio;
+    ratio.m_num = this->m_num + this->m_den;
+    ratio.m_den = this->m_den;
+    ratio = ratio.make_irreductible();
+    return ratio;
+}
+
 template <typename T> Ratio<T> Ratio<T>::operator--() {
+    Ratio ratio;
+    ratio.m_num = this->m_num - this->m_den;
+    ratio.m_den = this->m_den;
+    ratio = ratio.make_irreductible();
+    return ratio;
+}
+
+template <typename T> Ratio<T> Ratio<T>::operator++(int one) {
+    Ratio ratio;
+    ratio.m_num = this->m_num + this->m_den;
+    ratio.m_den = this->m_den;
+    ratio = ratio.make_irreductible();
+    return ratio;
+}
+
+template <typename T> Ratio<T> Ratio<T>::operator--(int one) {
     Ratio ratio;
     ratio.m_num = this->m_num - this->m_den;
     ratio.m_den = this->m_den;

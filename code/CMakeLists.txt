@@ -5,7 +5,6 @@ set(CMAKE_EXE_LINKER_FLAGS "-lrt")
 project(RatioTest)
 
 # file to compile and name of the executable
-# add_executable(simpleProject src/main.cpp src/plop.cpp include/plop.hpp)
 add_executable(RatioTest src/main.cpp)
 
 # include directory
@@ -18,9 +17,7 @@ target_include_directories(RatioTest PRIVATE "include")
 target_include_directories(RatioTest PRIVATE "include")
 
 # compilation options
-# target_compile_features(simpleProject PRIVATE cxx_std_11) # use at least c++ 11
 target_compile_features(RatioTest PRIVATE cxx_std_17) # use at least c++ 17
-
 
 if (MSVC)
     # target_compile_options(simpleProject PRIVATE /W3)
