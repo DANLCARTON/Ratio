@@ -140,6 +140,6 @@ Dans le dossier builf, après avoir fait la commande `cmake ..` ci-dessus :
 make html
 ```
 
-la documentation est accesssible à : file:///home/user/Ratio/build/INTERFACE/doc/doc-doxygen/html/index.html
+la documentation est accesssible dans : `./build/INTERFACE/doc/doc-doxygen/html/index.html`
 
 Elle est aussi accessible à tout moment sur https://www.ericthiberge.fr/Ratio/
