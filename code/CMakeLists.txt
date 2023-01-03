@@ -4,6 +4,11 @@ set(CMAKE_EXE_LINKER_FLAGS "-lrt")
 # give a name to the project
 project(RatioTest)
 
+enable_testing()
+
+find_package(GTest REQUIRED)
+include(GoogleTest)
+
 # file to compile and name of the executable
 add_executable(RatioTest src/main.cpp)
 
@@ -11,6 +16,7 @@ add_executable(RatioTest src/main.cpp)
 target_include_directories(RatioTest PRIVATE "include")
 
 target_link_libraries(RatioTest PRIVATE Ratio)      # lib dependency
+target_link_libraries(RatioTest PUBLIC GTest::GTest GTest::Main)
 
 # include directory
 target_include_directories(RatioTest PRIVATE "include")
