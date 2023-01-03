@@ -25,3 +25,4 @@ Ratio<int> convert_float_to_ratio(const double &real, const unsigned int &nbIter
     }
     return Ratio(0,1); // Pour éviter un warning.
 }
+

@@ -11,7 +11,7 @@ long int long_gcd(long int a, long int b) {
     return long_gcd(b, a%b);
 }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // C O N S T R U C T E U R S 
 
 TEST (RatioConstructor, defaultConstructor) {
@@ -34,7 +34,7 @@ TEST (RatioConstructor, copyConstructor) {
     }
 }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // O P E R A T E U R S
 
 // Somme
@@ -195,7 +195,7 @@ TEST (RatioArithmetic, unaryMinus) {
     }
 }
 
-// - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 // C O M P A R A I S O N S
 
 // égalité
@@ -587,7 +587,7 @@ int main(int argc, char **argv) {
     std::cout << Ratio<int>(-3628800, -132710400).make_irreductible() << std::endl;
     */
 
-    // Tests unitaires
+    //Tests unitaires
 	::testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();
 }  
