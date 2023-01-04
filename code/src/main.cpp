@@ -478,8 +478,8 @@ TEST (RatioMethods, logarithm) {
     auto gen = [&uniformDistributionValue, &generator](){ return uniformDistributionValue(generator);};
     for (size_t run = 0; run < 100; ++run) {
         Ratio<int> ratio(gen(), gen());
-        double log = ratio.log();
-        ASSERT_DOUBLE_EQ(log, std::log((double)ratio.num()) - std::log((double)ratio.den()));
+        Ratio log = ratio.log();
+        ASSERT_DOUBLE_EQ((double)log.num()/(double)log.den(), std::log((double)ratio.num()) - std::log((double)ratio.den()));
     }
 }
 
@@ -517,17 +517,22 @@ TEST (RatioMethods, absoluteValue) {
 }
 
 int main(int argc, char **argv) {
-    /*
+
+    // I N I T I A L I S A T I O N    V A L E U R 
+
+    Ratio<int> zero(0, 1);
+    Ratio<int> inf(1, 0);
     Ratio<int> a(4, 9);
     Ratio<int> b(5, 10);
     Ratio<int> c = a;
-    Ratio<int> d = a.sqrt();
-    Ratio<int> e(3, 10);
-    Ratio<int> f = e.sqrt();
-    Ratio<int> g(-34, 10);
-    Ratio<int> h(34, -10);
-    Ratio<int> i(-34, -10);
-    Ratio<long int> j(4000000000000, 4123456789123);
+    Ratio<int> d(3, 10);
+    Ratio<int> e(-34, 10);
+    Ratio<long int> f(99999/1000);
+
+    // T E S T S
+
+    std::cout << "// OPERATEUR  +  -  *  /  inverse  ++  --  //" << std::endl;
+
     std::cout << a << std::endl;
     std::cout << b << std::endl;
     std::cout << c << std::endl;
@@ -536,13 +541,25 @@ int main(int argc, char **argv) {
     std::cout << a-b << std::endl;
     std::cout << a-2 << std::endl;
     std::cout << a*b << std::endl;
+    std::cout << 2+a << std::endl;
+    // std::cout << zero*inf << std::endl;
     std::cout << a.inverse() << std::endl;
+    std::cout << zero.inverse() << std::endl;
     std::cout << a/b << std::endl;
+    std::cout << zero/b << std::endl;
+    std::cout << inf/b << std::endl;
+    std::cout << a/zero << std::endl;
+    std::cout << a/inf << std::endl;
     std::cout << a/2 << std::endl;
     std::cout << a*2 << std::endl;
     std::cout << ++a << std::endl;
     std::cout << --a << std::endl;
     std::cout << -a << std::endl;
+    std::cout << std::endl;
+
+
+    std::cout << "// OPERATEUR DE COMPARAISONS" << std::endl;
+
     std::cout << (a == b) << std::endl;
     std::cout << (a == c) << std::endl;
     std::cout << (a != b) << std::endl;
@@ -556,38 +573,66 @@ int main(int argc, char **argv) {
     std::cout << (a > b) << std::endl;
     std::cout << (a > c) << std::endl;
     std::cout << b.make_irreductible() << std::endl;
-    std::cout << "//////////////" << std::endl;
-    std::cout << d << std::endl;
-    std::cout << f << std::endl;
-    std::cout << e.pow(4) << std::endl;
-    std::cout << g.abs() << std::endl;
-    std::cout << g.int_part() << std::endl;
-    std::cout << a.int_part() << std::endl;
-    std::cout << "//////////////" << std::endl;
-    std::cout << a.log() << std::endl;
-    std::cout << g.log() << std::endl;
-    std::cout << "cos : " << a.cos() << std::endl;
-    std::cout << "cos : " << g.cos() << std::endl;
-    std::cout << "//////////////" << std::endl;
-    std::cout << convert_float_to_ratio(M_PI, 20) << std::endl;
-    std::cout << convert_float_to_ratio(-M_PI, 20) << std::endl;
-    std::cout << convert_float_to_ratio(14852.958645, 20) << std::endl;
-    std::cout << 2+a << std::endl;
-    std::cout << 2-a << std::endl;
-    std::cout << 2*a << std::endl;
-    std::cout << 2/a << std::endl;
-    std::cout << a++ << std::endl;
-    std::cout << a-- << std::endl;
-    Ratio aa = convert_float_to_ratio(2.5, 10);
-    std::cout << "test normal : " << convert_float_to_ratio(14852.958645, 47) << std::endl; // je crois qu'on ne pourra pas régler ça :/
-    std::cout << "test normal : " << convert_float_to_ratio(148.52,53) << std::endl;
-    std::cout << "aa : " << aa <<  std::endl;
-    std::cout << "test normal : " << convert_float_to_ratio(0.738469,53) << std::endl;
-    std::cout << g.sqrt() << std::endl;
-    std::cout << Ratio<int>(-3628800, -132710400).make_irreductible() << std::endl;
-    */
+    std::cout << Ratio<int>(-30, 0).make_irreductible() << std::endl;
+    std::cout << std::endl;
+    
+    
+    std::cout << "// OPERATEUR APPLICATIONS //" << std::endl;
 
+    std::cout << a.sqrt() << std::endl;         // exemple ou ça marche bien
+    std::cout << d.sqrt() << std::endl;         // précis 4 chiffres après la virgule ; dépend iter du convert_float_to_ratio
+    // std::cout << e.sqrt() << std::endl;      // exception
+
+    std::cout << d.pow(4) << std::endl;         // impec
+    std::cout << f.pow(4) << std::endl;
+
+    std::cout << e.abs() << std::endl;          // ERIC a fait une fonctio pour enlever les 2 moins unitaires
+
+    std::cout << e.int_part() << std::endl;     // impec
+    std::cout << a.int_part() << std::endl;     
+
+    std::cout << a.log() << std::endl;          // précis à 7 chiffres après la virgule ; dépend iter du convert_float_to_ratio
+    // std::cout << e.log() << std::endl;       // exception
+
+    std::cout << a.cos() << std::endl;          // précis à au moins 11 chiffres après la virgule ; dépend iter du convert_float_to_ratio
+    std::cout << e.cos() << std::endl;          // faire marcher le convert_float_to_ratio pour les négatifs
+
+    std::cout << a.sin() << std::endl;          // précis à au moins 11 chiffres après la virgule ; dépend iter du convert_float_to_ratio
+    std::cout << e.sin() << std::endl;          // faire marcher le convert_float_to_ratio pour les négatifs
+
+    std::cout << a.tan() << std::endl;          // précis à au moins 11 chiffres après la virgule ; dépend iter du convert_float_to_ratio
+    std::cout << e.tan() << std::endl;          // faire marcher le convert_float_to_ratio pour les négatifs
+
+    std::cout << a.exp() << std::endl;          // précis à 7 chiffres après la virgule ; dépend iter du convert_float_to_ratio
+    std::cout << e.exp() << std::endl;          // faire marcher le convert_float_to_ratio pour les négatifs
+
+    std::cout << std::endl;
+
+    std::cout << "// RESULTAT INFINI //" << std::endl;                      // ok
+
+    std::cout << Ratio<int> (1, 0) << std::endl;
+    std::cout << a*inf << std::endl;
+    std::cout << Ratio<int>(-1, 0) * Ratio<int>(5, 6) << std::endl;
+    std::cout << Ratio<int>(5, 6) * Ratio<int>(1, 0) << std::endl;
+    std::cout << std::endl;
+
+
+    std::cout << "// SUITE CONSTANTE 1 / 3 //" << std::endl;
+
+    Ratio<int> u(1, 3);
+    std::cout << "U_0 = " << u << std::endl; 
+    for (unsigned int n = 1; n < 100; ++n) {
+        u = u * 4 - 1;
+        std::cout << "U_" << n << " = " << u << " "; 
+    }
+    std::cout << std::endl;
+
+    std::cout << std::endl;
     //Tests unitaires
 	::testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();
 }  
+
+template class Ratio<int>;
+template class Ratio<long>;
+template class Ratio<long long>;

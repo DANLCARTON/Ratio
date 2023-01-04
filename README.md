@@ -117,9 +117,9 @@ Il est possible d'utiliser la commande `std::cout` pour afficher les Ratio dans 
 
 `std::cout << ratio1 << std::endl;`
 
-`>>> a/b`
+`>>> a / b`
 
-Il existe une fonction `convert_float_to_ratio(a, n)` prenant en paramètre `a` un nombre à virgule flottante et en paramètre `n` un entier non-signé. Cette fonction permet de convertir un nombre à virgule flottante $a$ en nombre rationnel. $n$ décrit la précision de l'algorithme utilisé. Une valeur entre 10 et 20 permet une précision satisfaisante de manière générale. 
+Il existe une fonction `convert_float_to_ratio<type>(a, n)` prenant en paramètre `a` un nombre à virgule flottante et en paramètre `n` un entier non-signé. Cette fonction permet de convertir un nombre à virgule flottante $a$ en nombre rationnel. $n$ décrit la précision de l'algorithme utilisé. `type` peut être `int`, `long` ou `long long` afin de choisir la méthode de représentation des entiers au numérateur et au dénominateur du rationnel.
 
 
 ## Compilation
