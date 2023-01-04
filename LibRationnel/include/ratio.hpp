@@ -87,8 +87,6 @@ template <typename T> class Ratio{
      */
     constexpr Ratio operator+(const T &real) const;
 
-    // template <typename U> friend Ratio operator+(U real, const Ratio<U> &rn);
-
     /**
      * @brief Opérateur ++ préfixé
      * 
