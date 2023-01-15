@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.13)
-set(CMAKE_EXE_LINKER_FLAGS "-lrt")
+# set(CMAKE_EXE_LINKER_FLAGS "-lrt")
 
 
 # give a name to the project
