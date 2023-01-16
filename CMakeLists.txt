@@ -44,3 +44,7 @@ include_directories(${CMAKE_SOURCE_DIR}/LibRationnel/include) # important : othe
 # add test code
 message(STATUS "code cmake part ..." )
 add_subdirectory(code)
+
+# add google test
+message(STATUS "google test cmake part ..." )
+add_subdirectory(googletest)

@@ -518,7 +518,7 @@ TEST (RatioMethods, absoluteValue) {
 
 int main(int argc, char **argv) {
 
-    // I N I T I A L I S A T I O N    V A L E U R 
+    // I N I T I A L I S A T I O N    V A L E U R S
 
     Ratio<int> zero(0, 1);
     Ratio<int> inf(1, 0);
